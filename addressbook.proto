@@ -41,4 +41,6 @@ message ListPersonRequest{}
 message ListPersonResponse{
   repeated Person Person=1;
 }
-message AddPersonResponse{}
+message AddPersonResponse{
+  Person Person=1;
+}

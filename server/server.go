@@ -4,6 +4,8 @@ import (
 	"context"
 	pb "grpc/server/addressbook"
 	"log"
+
+	"google.golang.org/protobuf/proto"
 )
 
 type addressbookServer struct {
@@ -22,5 +24,10 @@ func (s *addressbookServer) ListPersons(ctx context.Context, req *pb.ListPersonR
 
 func (s *addressbookServer) AddPerson(ctx context.Context, person *pb.Person) (*pb.AddPersonResponse, error) {
 	log.Println("adding person.....")
-	return &pb.AddPersonResponse{}, nil
+	response := &pb.AddPersonResponse{
+		Person: person,
+	}
+	responseSize := proto.Size(response)
+	log.Printf("Response: %v, Size: %d bits\n", response, responseSize)
+	return response, nil
 }

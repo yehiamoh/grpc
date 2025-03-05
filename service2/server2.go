@@ -15,10 +15,11 @@ func main() {
 	}
 	defer conn.Close()
 	client := pb.NewAddressBookServiceClient(conn)
-	if _, err = client.AddPerson(context.Background(), &pb.Person{
+	person := &pb.Person{
 		Name: "yehia",
-		Id:   5,
-	}); err != nil {
+		Id:   1,
+	}
+	if _, err = client.AddPerson(context.Background(), person); err != nil {
 		log.Fatal("couldnot add person")
 	}
 }
